@@ -1,5 +1,5 @@
-let player1 = { symbol : "O", name : "Loic" } // le nom du joueur sera pour plus tard
-let player2 = { symbol : "X", name : "Marie"}
+let player1 = { symbol : "X", name : "Loic" } // le nom du joueur sera pour plus tard
+let player2 = { symbol : "O", name : "Marie"}
 
 let name1 = document.getElementById("gamer1Name") // Permettra d'intéragir avec l'ID des noms.
 let name2 = document.getElementById("gamer2Name")
@@ -34,7 +34,6 @@ const board = document.querySelector("#board")
  
 newGame() // Appel automatique de la fct newGame pour afficher directement le morpion à l'ouverture de la page.
 
-
 // FONCTIONS DE JEU
 
 function newGame(){ // Création d'une nouvelle partie.
@@ -54,18 +53,22 @@ function newGame(){ // Création d'une nouvelle partie.
 
         if (!gameFinished && newBox.innerText == ""){ // Si le jeu n'est pas déclaré comme fini (si y'a pas de vainqueur), ET si le contenu de la box est VIDE alors le coup se déroule.
          
-          switchPlayer() // On switche de joueur
-
           newBox.textContent = player; // Insère dans la box HTML qui a été cliquée le symbole du joueur en cours.
 
-          count++; // Incrémentation du nbr de coups (9 max possible)
-            
-          } // Si le jeu est fini, il ne se passe plus rien. Il est ainsi figé.
-        
-        
-          if (!gameFinished && count >= 5){ // Permettra de figer le vainqueur une fois le score atteint.
-            checkScore(player) // Tant que le jeu n'est pas fini, on fait un checkscore à chaque coup. l'appelle à partir du coup numéro 5 pour économiser des ressources.  
-          }
+          checkScore(player)
+
+          if (!gameFinished){
+
+            switchPlayer() // Vu qu'on a fait un checkScore, si la partie n'est pas finie on switch.
+
+            count++; // Incrémentation du nbr de coups (9 max possible)
+          } 
+
+          }  // Si le jeu est fini, il ne se passe plus rien. Il est ainsi figé.
+                
+          // if (!gameFinished && count >= 5){ // Permettra de figer le vainqueur une fois le score atteint.
+          //   checkScore(player) // Tant que le jeu n'est pas fini, on fait un checkscore à chaque coup. l'appelle à partir du coup numéro 5 pour économiser des ressources.  
+          // }
                     
           if (count == 9 && !checkScore()){ // Si le nbr de coup est à 9 (soit le max) et que checkScore renvoie false, alors match nul.
         
@@ -88,22 +91,27 @@ function switchPlayer(){ // Fonction permettant de switcher de joueur et donc de
 
     player = player2.symbol 
 
+    if (!gameFinished) {
+
     competitor2.textContent = "A toi de jouer !"
     competitor1.textContent = ""
+    }
 
   } else {
     
     player = player1.symbol
 
+    if (!gameFinished){
+
     competitor1.textContent = "A toi de jouer !"
     competitor2.textContent = ""
+  }
 
   }
   
 }
 
-
-function checkScore(player){  // Check toutes les conditions possibles de victoire à chaque coup joué. Utilisée à partir du coup numéro 5 car c'est à partir du 5e coup qu'il peut y avoir un vainqueur.
+function checkScore(player){  // Check toutes les conditions possibles de victoire à chaque coup joué. 
   
   // Principe : on vérifie le contenu .innerText de chaque box. Si c'est un "O" ou un "X" Il faut que les 3 conditions soient réunies pour ressortir un True.
 
@@ -142,7 +150,7 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
       competitor1.textContent = "Gagné !"
       competitor2.textContent = ""
       scorePlayer1++
-      showScore1.textContent = "Score : " + scorePlayer1
+      showScore1.textContent = "Score : " + scorePlayer1      
 
     } else {
       
@@ -150,6 +158,7 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
       competitor1.textContent = ""
       scorePlayer2++
       showScore2.textContent = "Score : " + scorePlayer2
+      
     }
     
     gameFinished = true; // La game passe en True pour figer uniquement le vainqueur. Checkscore ne sera plus appelée. 
@@ -159,7 +168,7 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
   }
 }
 
-function reloadGame(){
+function reloadGame(){  
 
   jeu.textContent = "C'est parti !"
     
@@ -174,8 +183,10 @@ function reloadGame(){
   newGame() // Recréation des box.
   gameFinished = false; // Réinitialisation de la game.
   count = 0; // Réinitialisation du compteur de coups
+
+  switchPlayer()
   
-  if (player == "O"){
+  if (player == "X"){
 
     competitor1.textContent = "A toi !"
     competitor2.textContent = ""
