@@ -72,7 +72,7 @@ function newGame(){ // Création d'une nouvelle partie.
                     
           if (count == 9 && !checkScore()){ // Si le nbr de coup est à 9 (soit le max) et que checkScore renvoie false, alors match nul.
         
-            jeu.textContent = "Match nul !" // Quand il y a 9 coups de joués et pas de vainqueur, affichage de match nul et on déclare la fin du jeu.
+            jeu.textContent = "MATCH NUL !" // Quand il y a 9 coups de joués et pas de vainqueur, affichage de match nul et on déclare la fin du jeu.
             
             competitor2.textContent = ""
             competitor1.textContent = ""
@@ -163,14 +163,14 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
     
     gameFinished = true; // La game passe en True pour figer uniquement le vainqueur. Checkscore ne sera plus appelée. 
 
-    jeu.textContent = "Partie terminée !"
+    jeu.textContent = "PARTIE TERMINEE !"
 
   }
 }
 
 function reloadGame(){  
 
-  jeu.textContent = "C'est parti !"
+  jeu.textContent = "C'EST PARTI"
     
   for(let i = 1; i<= 9; i++){
 
