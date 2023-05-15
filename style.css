@@ -1,0 +1,55 @@
+#board{
+    display : flex;
+    flex-wrap: wrap;
+    width : 300px;
+    align-content: center;
+    justify-content: center;
+}
+
+.box{
+    width: 75px;
+    height: 75px;
+    border : 1px solid black;
+    text-align: center;
+    line-height: 75px;
+    margin : 0px;
+}
+
+
+
+table, td{
+border : 1px solid black;
+}
+
+h1, h2, p{
+text-align: center;
+}
+
+td{
+width : 100px;
+height : 100px;
+text-align : center;
+}
+
+#retry{
+display: block; /*Par défaut inline block. Ce qui ne le centre pas*/
+margin : 30px auto;
+}
+
+.gameBorder{
+margin : auto;
+width : 100vh;
+justify-content: space-evenly;
+display: flex;
+border : 1px solid black;
+}
+
+#competitor1, #competitor2{
+
+width : 300px;
+margin-top : 150px;
+
+font-size: 2em;
+font-weight: bold;
+
+}
