@@ -1,6 +1,11 @@
 let player1 = { symbol : "O", name : "Loic" }; // le nom du joueur sera pour plus tard
 let player2 = { symbol : "X", name : "Marie"};
 
+let scorePlayer1 = 0
+let scorePlayer2 = 0
+let showScore1 = document.getElementById("score1")
+let showScore2 = document.getElementById("score2")
+
 let jeu = document.getElementById("game");
 
 let count = 0; // compteur des coups. 9 max.
@@ -8,6 +13,7 @@ let count = 0; // compteur des coups. 9 max.
 let player = player1.symbol; // Par défaut le player1
 
 let competitor1 = document.getElementById("competitor1") // competitor 1 et 2 seront les zones d'affichage pour chaque joueur. "A toi de jouer !" ou encore "gagné !"
+
 let competitor2 = document.getElementById("competitor2")
 
 let gameFinished = false
@@ -38,11 +44,11 @@ function newGame(){ // Création d'une nouvelle partie.
     newBox.addEventListener("click", function(){
 
         if (!gameFinished && newBox.innerText == ""){ // Si le jeu n'est pas déclaré comme fini (si y'a pas de vainqueur), ET si le contenu de la box est VIDE alors le coup se déroule.
-
+         
           switchPlayer() // On switche de joueur
-          
+
           newBox.textContent = player; // Insère dans la box HTML qui a été cliquée le symbole du joueur en cours.
-              
+
           count++; // Incrémentation du nbr de coups (9 max possible)
             
           } // Si le jeu est fini, il ne se passe plus rien. Il est ainsi figé.
@@ -52,7 +58,7 @@ function newGame(){ // Création d'une nouvelle partie.
             checkScore(player) // Tant que le jeu n'est pas fini, on fait un checkscore à chaque coup. l'appelle à partir du coup numéro 5 pour économiser des ressources.  
           }
                     
-          if (count == 10 && !checkScore()){ // Si le nbr de coup est à 9 (soit le max) et que checkScore renvoie false, alors match nul.
+          if (count == 9 && !checkScore()){ // Si le nbr de coup est à 9 (soit le max) et que checkScore renvoie false, alors match nul.
         
             jeu.textContent = "Match nul !" // Quand il y a 9 coups de joués et pas de vainqueur, affichage de match nul et on déclare la fin du jeu.
             
@@ -64,9 +70,6 @@ function newGame(){ // Création d'une nouvelle partie.
     }) // Fin de l'écoute événementielle au clic
   }
 }
-
-
-
 
 // FONCTIONS DIVERSES 
 
@@ -129,11 +132,15 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
 
       competitor1.textContent = "Gagné !"
       competitor2.textContent = ""
+      scorePlayer1++
+      showScore1.textContent = "Score : " + scorePlayer1
 
     } else {
       
       competitor2.textContent = "Gagné !"
       competitor1.textContent = ""
+      scorePlayer2++
+      showScore2.textContent = "Score : " + scorePlayer2
     }
     
     gameFinished = true; // La game passe en True pour figer uniquement le vainqueur. Checkscore ne sera plus appelée. 
@@ -141,12 +148,11 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
     jeu.textContent = "Partie terminée !"
 
   }
-
 }
 
-
-
 function reloadGame(){
+
+  jeu.textContent = "C'est parti !"
     
   for(let i = 1; i<= 9; i++){
 
@@ -156,14 +162,18 @@ function reloadGame(){
 
   }
 
-  newGame()
+  newGame() // Recréation des box.
+  gameFinished = false; // Réinitialisation de la game.
+  count = 0; // Réinitialisation du compteur de coups
+  
+  if (player == "O"){
 
-  gameFinished = false; 
-  count = 0; 
+    competitor1.textContent = "A toi !"
+    competitor2.textContent = ""
 
-  competitor2.textContent = ""
-  competitor1.textContent = ""
-
-
-
+  } else {
+    
+    competitor2.textContent = "A toi !"
+    competitor1.textContent = ""
   }
+}
