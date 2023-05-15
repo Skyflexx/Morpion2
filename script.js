@@ -1,12 +1,16 @@
-let player1 = { symbol : "O", name : "Loic" }; // le nom du joueur sera pour plus tard
-let player2 = { symbol : "X", name : "Marie"};
+let player1 = { symbol : "O", name : "Loic" } // le nom du joueur sera pour plus tard
+let player2 = { symbol : "X", name : "Marie"}
+
+let name1 = document.getElementById("gamer1Name") // Permettra d'intéragir avec l'ID des noms.
+let name2 = document.getElementById("gamer2Name")
 
 let scorePlayer1 = 0
 let scorePlayer2 = 0
+
 let showScore1 = document.getElementById("score1")
 let showScore2 = document.getElementById("score2")
 
-let jeu = document.getElementById("game");
+let jeu = document.getElementById("gameTitle"); // Pour intéragir avec le titre H1
 
 let count = 0; // compteur des coups. 9 max.
 
@@ -20,11 +24,13 @@ let gameFinished = false
 
 competitor1.textContent = "A toi de jouer !"
 
-// CREATION DES BOX
+// CREATION DE LA BOX DE BASE ----------------------------------------
 
 const box = document.createElement("div") // créé une div 
 box.classList.add("box") // ajoute la classe css à notre box
 const board = document.querySelector("#board")
+
+// ---------------------------------------------------------------
  
 newGame() // Appel automatique de la fct newGame pour afficher directement le morpion à l'ouverture de la page.
 
@@ -32,6 +38,9 @@ newGame() // Appel automatique de la fct newGame pour afficher directement le mo
 // FONCTIONS DE JEU
 
 function newGame(){ // Création d'une nouvelle partie.
+
+  name1.textContent = "Joueur 1 : " + player1.name
+  name2.textContent = "Joueur 2 : " + player2.name
 
   for(let i = 1; i<= 9; i++){ // Création de 9 box
 
