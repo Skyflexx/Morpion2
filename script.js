@@ -113,27 +113,48 @@ inputName1.value = ""})
 inputName2.addEventListener("click", function(){
 inputName2.value = ""})
 
-
+let player1Ready = false
+let player2Ready = false
 
 btnName1.addEventListener("click", function(){
+
 player1.name = inputName1.value
-player1.symbol = selectSymbol1.value
-console.log(player1.symbol)
-name1.textContent = inputName1.value
-btnName1.remove()
-inputName1.remove()
-showSymbolP1.textContent = "Symbole : " + player1.symbol
+
+
+
+if (player2Ready == true && (selectSymbol1.value == player2.symbol)){
+  
+    jeu.textContent = player1.name + " Veuillez choisir un autre symbole"
+
+  } else {
+    name1.textContent = inputName1.value
+    player1Ready = true;
+    player1.symbol = selectSymbol1.value
+    // btnName1.remove() // Pas besoin car au clic le contenu de la balise est remplacé par le nom du joueur.
+    // inputName1.remove()
+    showSymbolP1.textContent = "Symbole : " + player1.symbol
+  }
 })
 
 btnName2.addEventListener("click", function(){
+  
 player2.name = inputName2.value
-player2.symbol = selectSymbol2.value
-console.log(player2.symbol)
-name2.textContent = inputName2.value
-showSymbolP2.textContent = "Symbole : " + player2.symbol
 
-btnName2.remove()
-inputName2.remove()
+
+
+if (player1Ready == true && (player1.symbol == selectSymbol2.value) ){
+  
+    jeu.textContent = player2.name + " Veuillez choisir un autre symbole"
+    console.log(player2Ready)
+
+  } else {
+    name2.textContent = inputName2.value
+    player2Ready = true;
+    player2.symbol = selectSymbol2.value
+    showSymbolP2.textContent = "Symbole : " + player2.symbol
+    // btnName2.remove() // Pas besoin car au clic le contenu de la balise est remplacé par le nom du joueur.
+    // inputName2.remove()
+  }
 })
 
 
@@ -150,11 +171,34 @@ btnBegin.addEventListener("click", function(){
 
     showSymbolP1.textContent = "Symbole : " + player1.symbol 
     showSymbolP2.textContent = "Symbole : " + player2.symbol
-  
+  addReloadBtn()
   newGame()
   btnBegin.remove()
 }
 })
+
+// BOUTON QUI APPARAIT POUR RELANCER UNE PARTIE
+function addReloadBtn(){
+
+const reloadBtn = document.createElement("button")
+
+reloadBtn.textContent = " Relancer"
+
+reloadBtn.classList.add("retry")
+
+const reloadArea = document.querySelector("#reload")
+
+reloadArea.appendChild(reloadBtn)
+
+//Fonction associée pour relancer une game
+
+reloadBtn.addEventListener("click", function(){
+
+  reloadGame()
+
+})
+
+}
 
 // ---------------------------------------------------------------
  

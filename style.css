@@ -25,6 +25,7 @@ body{
 
 #gamer1, #gamer2{
     background-color: #83c5be;
+    border-radius: 15px;
 }
 
 h1, h2, p{
@@ -34,7 +35,7 @@ h1, h2, p{
 h1{
     background-color: #E56B6F;
     color : #ffffff;
-    width : 400px;
+    width : 450px;
     padding-top: 30px;
     padding-bottom: 30px;  
     border-radius: 30px;
@@ -63,7 +64,7 @@ p{
     font-size: 1.3em;
 }
 
-#retry{
+.retry{
     border-radius: 15px;
     font-size: 1em;
     font-weight: bold;
