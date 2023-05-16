@@ -1,5 +1,10 @@
-let player1 = { symbol : "O", name : "George" } // le nom du joueur sera pour plus tard
+let player1 = { symbol : "O", name : "George" } // Object joueur contenant symbole et nom par défaut.
 let player2 = { symbol : "X", name : "Georgette"}
+
+let player1Ready = false // Initialisation des joueurs à false. Il faudra cliquer sur OK pour que ça passe true indiquant que le joueur est prêt
+let player2Ready = false
+
+let gameFinished = false // Passera à True quand la partie sera terminée !
 
 let name1 = document.getElementById("gamer1Name") // Permettra d'intéragir avec l'ID des noms.
 let name2 = document.getElementById("gamer2Name")
@@ -7,27 +12,22 @@ let name2 = document.getElementById("gamer2Name")
 let showSymbolP1 = document.getElementById("symbolP1") // Permettra d'intéragir avec le paragraphe qui affiche le symbole des joueurs
 let showSymbolP2 = document.getElementById("symbolP2")
 
-let scorePlayer1 = 0
+let scorePlayer1 = 0 // Initialisation des scores à 0
 let scorePlayer2 = 0
-
-let showScore1 = document.getElementById("score1")
-let showScore2 = document.getElementById("score2")
-
-let jeu = document.getElementById("gameTitle"); // Pour intéragir avec le titre H1
-
 let count = 0; // compteur des coups. 9 max.
 
-let player = player1.symbol; // Par défaut le player1
+let showScore1 = document.getElementById("score1") // Permettra d'afficher le score par la suite.
+let showScore2 = document.getElementById("score2")
 
 let competitor1 = document.getElementById("competitor1") // competitor 1 et 2 seront les zones d'affichage pour chaque joueur. "A toi de jouer !" ou encore "gagné !"
 
 let competitor2 = document.getElementById("competitor2")
 
-let gameFinished = false
+let player = player1.symbol; // Par défaut le player1
 
+let jeu = document.getElementById("gameTitle"); // Pour intéragir avec le titre H1
 
-
-// CREATION DE LA BOX DE BASE ----------------------------------------
+// CREATION DE LA BOX DE BASE pour l'affichage du quadrillage du morpion ----------------------------------------
 
 const box = document.createElement("div") // créé une div 
 box.classList.add("box") // ajoute la classe css à notre box
@@ -36,95 +36,91 @@ const board = document.querySelector("#board")
 
 // Creation des Input pour les noms des joueurs et des symboles respectifs
 
-const gamer1Area = document.querySelector("#gamer1Name")
+const gamer1Area = document.querySelector("#gamer1Name") // gameArea c'est le titre h2 qui aura le nom du joueur
 const gamer2Area = document.querySelector("#gamer2Name")
 
-const inputName1 = document.createElement("input")
+const inputName1 = document.createElement("input") // création d'un input pour indiquer son nom
 const inputName2 = document.createElement("input")
+
+inputName1.value = "Joueur 1" // Par défaut joueur 1 et 2 à l'intérieur de l'input field
+inputName2.value = "Joueur 2"
+
+inputName1.classList.add("gamerInput") // Avec leur CSS Respectifs
+inputName2.classList.add("gamerInput")
+
+// Au clic des inputField, ça les vide.
+inputName1.addEventListener("click", function(){
+inputName1.value = ""})
+  
+inputName2.addEventListener("click", function(){
+inputName2.value = ""})
 
 // CREATION DU MENU DEROULANT DES SYMBOLES
 
-const selectSymbol1 = document.createElement("select")
+const selectSymbol1 = document.createElement("select") // Création de la select field pour select son symbole. Il faudra y ajouter des balises option pour chaque symbole.
 const selectSymbol2 = document.createElement("select")
 
-const symbol1 = document.createElement("option")
+const symbol1 = document.createElement("option") // Ajout des balises options pour ajouter chaque symbole. Obligé de l'afficher pour chaque select. 1 ne fonctionne pas.
 const symbol2 = document.createElement("option")
 
-const symbol3 = document.createElement("option")
+const symbol3 = document.createElement("option") // Pour la selectfield du joueur 2
 const symbol4 = document.createElement("option")
 
-symbol1.value = "O"
+symbol1.value = "O" // On ajoute les symboles en value et en textContent pour l'affichage. On inverse volontairement les deux pour un affichage + ergonomique.
 symbol2.value = "X"
 
-symbol3.value = "X"
+symbol3.value = "X" 
 symbol4.value = "O"
 
-symbol1.textContent = "O"
+symbol1.textContent = "O" 
 symbol2.textContent = "X"
 
 symbol3.textContent = "X"
 symbol4.textContent = "O"
 
-selectSymbol1.appendChild(symbol1)
+selectSymbol1.appendChild(symbol1) // Affichage dans le HTML des différents symboles dans le select.
 selectSymbol1.appendChild(symbol2)
-
 
 selectSymbol2.appendChild(symbol3)
 selectSymbol2.appendChild(symbol4)
 
-
-
 //------------------------
 
-// CREATION DES BOUTONS VALIDANT LE PROFIL DU JOUEUR
-
+// Création des 2 boutons "OK" pour que chaque joueur puisse valider son profil
 const btnName1 = document.createElement ("button")
 const btnName2 = document.createElement ("button")
 
-const btnBegin = document.createElement ("button")
-btnBegin.classList.add("btnBegin")
-
-gamer1Area.appendChild(inputName1)
-gamer2Area.appendChild(inputName2)
-
-gamer1Area.appendChild(selectSymbol1)
-gamer2Area.appendChild(selectSymbol2)
-
-gamer1Area.appendChild(btnName1)
-gamer2Area.appendChild(btnName2)
-
-board.appendChild(btnBegin)
-btnBegin.innerText = "Commencer !"
-
-inputName1.classList.add("gamerInput")
-inputName2.classList.add("gamerInput")
-
-inputName1.value = "Joueur 1"
-inputName2.value = "Joueur 2"
-
-btnName1.innerText = "OK"
+btnName1.innerText = "OK" // Sans oublier leur contenu respectifs.
 btnName2.innerText = "OK"
 
+// Creation du btn pour lancer la partie + sa partie Style CSS
+const btnBegin = document.createElement ("button")
+btnBegin.classList.add("btnBegin") 
+btnBegin.innerText = "Commencer !"
 
-// Au clic des inputField, ça les vide.
-inputName1.addEventListener("click", function(){
-inputName1.value = ""})
+// AFFICHAGE DANS LE HTML DES DIFFERENTS ELEMENTS DES JOUEURS
 
-inputName2.addEventListener("click", function(){
-inputName2.value = ""})
+gamer1Area.appendChild(inputName1) // Affichage HTML de la inputField
+gamer2Area.appendChild(inputName2)
 
-let player1Ready = false
-let player2Ready = false
+gamer1Area.appendChild(selectSymbol1) // Affichage HTML de la selection des symboles.
+gamer2Area.appendChild(selectSymbol2)
+
+gamer1Area.appendChild(btnName1) // Affichage dans le HTML des btn "OK" pour chaque joueur
+gamer2Area.appendChild(btnName2)
+
+board.appendChild(btnBegin) // Affichage dans le HTML du btn BEGIN
+
+
 
 btnName1.addEventListener("click", function(){
 
 player1.name = inputName1.value
 
 
-
 if (player2Ready == true && (selectSymbol1.value == player2.symbol)){
   
-    jeu.textContent = player1.name + " Veuillez choisir un autre symbole"
+    jeu.textContent = player1.name + " veuillez choisir un autre symbole"
 
   } else {
     name1.textContent = inputName1.value
@@ -144,7 +140,7 @@ player2.name = inputName2.value
 
 if (player1Ready == true && (player1.symbol == selectSymbol2.value) ){
   
-    jeu.textContent = player2.name + " Veuillez choisir un autre symbole"
+    jeu.textContent = player2.name + " veuillez choisir un autre symbole"
     console.log(player2Ready)
 
   } else {
@@ -157,24 +153,27 @@ if (player1Ready == true && (player1.symbol == selectSymbol2.value) ){
   }
 })
 
-
-
 // BOUTON PERMETTANT DE COMMENCER LA PARTIE
 btnBegin.addEventListener("click", function(){
 
-  if (player1.symbol == player2.symbol ){
+  if (player1Ready && player2Ready){
+
+
+    showSymbolP1.textContent = "Symbole : " + player1.symbol 
+    showSymbolP2.textContent = "Symbole : " + player2.symbol
+    addReloadBtn()
+    newGame()
+    btnBegin.remove()
+
+  } else {
+
     jeu.textContent = "La partie ne peut pas commencer !"
 
     // Reafficher le choix des symboles.
 
-  } else {
-
-    showSymbolP1.textContent = "Symbole : " + player1.symbol 
-    showSymbolP2.textContent = "Symbole : " + player2.symbol
-  addReloadBtn()
-  newGame()
-  btnBegin.remove()
+    
 }
+
 })
 
 // BOUTON QUI APPARAIT POUR RELANCER UNE PARTIE
@@ -212,9 +211,11 @@ function newGame(){ // Création d'une nouvelle partie.
   name2.textContent = player2.name
 
   if (player1.symbol == "O"){
+    document.getElementById("gamer1").style.backgroundColor = "#bdfff8"; // clair
     competitor1.textContent = "A toi de jouer !"
     competitor2.textContent = ""
   } else {
+    document.getElementById("gamer2").style.backgroundColor = "#bdfff8"; // clair
     competitor2.textContent = "A toi de jouer !"
     competitor1.textContent = ""
   }
@@ -271,6 +272,9 @@ function switchPlayer(){ // Fonction permettant de switcher de joueur et donc de
 
     if (!gameFinished) {
 
+    document.getElementById("gamer1").style.backgroundColor = "#83c5be"; // foncé
+    document.getElementById("gamer2").style.backgroundColor = "#bdfff8"; // clair
+
     competitor2.textContent = "A toi de jouer !"
     competitor1.textContent = ""
     }
@@ -280,6 +284,9 @@ function switchPlayer(){ // Fonction permettant de switcher de joueur et donc de
     player = player1.symbol
 
     if (!gameFinished){
+
+    document.getElementById("gamer1").style.backgroundColor = "#bdfff8"; // clair
+    document.getElementById("gamer2").style.backgroundColor = "#83c5be"; // foncé
 
     competitor1.textContent = "A toi de jouer !"
     competitor2.textContent = ""
@@ -362,14 +369,14 @@ function reloadGame(){
 
   switchPlayer()
   
-  if (player == "O"){
+  // if (player == "O"){
 
-    competitor1.textContent = "A toi !"
-    competitor2.textContent = ""
+  //   competitor1.textContent = "A toi !"
+  //   competitor2.textContent = ""
 
-  } else {
+  // } else {
     
-    competitor2.textContent = "A toi !"
-    competitor1.textContent = ""
-  }
+  //   competitor2.textContent = "A toi !"
+  //   competitor1.textContent = ""
+  // }
 }

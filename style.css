@@ -42,6 +42,7 @@ h1{
     border : 3px solid white; 
     margin : 20px auto;
 }
+
 h2{
     width : 250px;
     border-radius: 15px;
@@ -64,7 +65,7 @@ p{
     font-size: 1.3em;
 }
 
-.retry{
+.retry{ /* Bouton reload game */
     border-radius: 15px;
     font-size: 1em;
     font-weight: bold;
@@ -78,7 +79,7 @@ p{
     border:none;
 }
 
-#retry:active{
+.retry:active{
     width : 149px;
     height : 49px;
     background-color: #9ff1e9;
@@ -130,7 +131,7 @@ button:active{
     width : 39px;
 }
 
-.btnBegin{
+.btnBegin{ /* Btn commencer le jeu */
     width : 150px;
 }
 
@@ -139,7 +140,7 @@ button:active{
     width : 145px;
 }
 
-select{
+select{ /* Contiendra la liste des symboles à choisir */
     outline: none;
     border : none;
     border-radius: 5px;
