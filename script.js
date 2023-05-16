@@ -129,6 +129,7 @@ btnName1.addEventListener("click", function(){ // Lorsque joueur 1 clique sur Ok
       // inputName1.remove()
       showSymbolP1.textContent = "Symbole : " + player1.symbol
   }
+ 
 })
 
 btnName2.addEventListener("click", function(){ // Idem lorsque joueur 2 clique sur Ok
