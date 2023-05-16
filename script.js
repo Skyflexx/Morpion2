@@ -144,7 +144,7 @@ btnBegin.addEventListener("click", function(){
   if (player1.symbol == player2.symbol ){
     jeu.textContent = "La partie ne peut pas commencer !"
 
-    // Reafficher les box concernées.
+    // Reafficher le choix des symboles.
 
   } else {
 
