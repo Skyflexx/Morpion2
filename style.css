@@ -137,3 +137,14 @@ button:active{
     background-color: #355070;
     width : 145px;
 }
+
+select{
+    outline: none;
+    border : none;
+    border-radius: 5px;
+    width : 40px;
+    height : 40px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+

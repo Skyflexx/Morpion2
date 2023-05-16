@@ -1,8 +1,11 @@
-let player1 = { symbol : "X", name : "George" } // le nom du joueur sera pour plus tard
-let player2 = { symbol : "O", name : "Georgette"}
+let player1 = { symbol : "O", name : "George" } // le nom du joueur sera pour plus tard
+let player2 = { symbol : "X", name : "Georgette"}
 
 let name1 = document.getElementById("gamer1Name") // Permettra d'intéragir avec l'ID des noms.
 let name2 = document.getElementById("gamer2Name")
+
+let showSymbolP1 = document.getElementById("symbolP1") // Permettra d'intéragir avec le paragraphe qui affiche le symbole des joueurs
+let showSymbolP2 = document.getElementById("symbolP2")
 
 let scorePlayer1 = 0
 let scorePlayer2 = 0
@@ -22,7 +25,7 @@ let competitor2 = document.getElementById("competitor2")
 
 let gameFinished = false
 
-competitor1.textContent = ""
+
 
 // CREATION DE LA BOX DE BASE ----------------------------------------
 
@@ -39,6 +42,42 @@ const gamer2Area = document.querySelector("#gamer2Name")
 const inputName1 = document.createElement("input")
 const inputName2 = document.createElement("input")
 
+// CREATION DU MENU DEROULANT DES SYMBOLES
+
+const selectSymbol1 = document.createElement("select")
+const selectSymbol2 = document.createElement("select")
+
+const symbol1 = document.createElement("option")
+const symbol2 = document.createElement("option")
+
+const symbol3 = document.createElement("option")
+const symbol4 = document.createElement("option")
+
+symbol1.value = "O"
+symbol2.value = "X"
+
+symbol3.value = "X"
+symbol4.value = "O"
+
+symbol1.textContent = "O"
+symbol2.textContent = "X"
+
+symbol3.textContent = "X"
+symbol4.textContent = "O"
+
+selectSymbol1.appendChild(symbol1)
+selectSymbol1.appendChild(symbol2)
+
+
+selectSymbol2.appendChild(symbol3)
+selectSymbol2.appendChild(symbol4)
+
+
+
+//------------------------
+
+// CREATION DES BOUTONS VALIDANT LE PROFIL DU JOUEUR
+
 const btnName1 = document.createElement ("button")
 const btnName2 = document.createElement ("button")
 
@@ -47,6 +86,9 @@ btnBegin.classList.add("btnBegin")
 
 gamer1Area.appendChild(inputName1)
 gamer2Area.appendChild(inputName2)
+
+gamer1Area.appendChild(selectSymbol1)
+gamer2Area.appendChild(selectSymbol2)
 
 gamer1Area.appendChild(btnName1)
 gamer2Area.appendChild(btnName2)
@@ -57,14 +99,14 @@ btnBegin.innerText = "Commencer !"
 inputName1.classList.add("gamerInput")
 inputName2.classList.add("gamerInput")
 
-inputName1.value = "Ajoute ton nom"
-inputName2.value = "Ajoute ton nom"
+inputName1.value = "Joueur 1"
+inputName2.value = "Joueur 2"
 
 btnName1.innerText = "OK"
 btnName2.innerText = "OK"
 
 
-
+// Au clic des inputField, ça les vide.
 inputName1.addEventListener("click", function(){
 inputName1.value = ""})
 
@@ -75,21 +117,43 @@ inputName2.value = ""})
 
 btnName1.addEventListener("click", function(){
 player1.name = inputName1.value
+player1.symbol = selectSymbol1.value
+console.log(player1.symbol)
 name1.textContent = inputName1.value
 btnName1.remove()
 inputName1.remove()
+showSymbolP1.textContent = "Symbole : " + player1.symbol
 })
 
 btnName2.addEventListener("click", function(){
 player2.name = inputName2.value
+player2.symbol = selectSymbol2.value
+console.log(player2.symbol)
 name2.textContent = inputName2.value
+showSymbolP2.textContent = "Symbole : " + player2.symbol
+
 btnName2.remove()
 inputName2.remove()
 })
 
+
+
+// BOUTON PERMETTANT DE COMMENCER LA PARTIE
 btnBegin.addEventListener("click", function(){
+
+  if (player1.symbol == player2.symbol ){
+    jeu.textContent = "La partie ne peut pas commencer !"
+
+    // Reafficher les box concernées.
+
+  } else {
+
+    showSymbolP1.textContent = "Symbole : " + player1.symbol 
+    showSymbolP2.textContent = "Symbole : " + player2.symbol
+  
   newGame()
   btnBegin.remove()
+}
 })
 
 // ---------------------------------------------------------------
@@ -100,8 +164,16 @@ btnBegin.addEventListener("click", function(){
 
 function newGame(){ // Création d'une nouvelle partie.
 
-  name1.textContent = "Joueur 1 : " + player1.name
-  name2.textContent = "Joueur 2 : " + player2.name
+  name1.textContent = player1.name
+  name2.textContent = player2.name
+
+  if (player1.symbol == "O"){
+    competitor1.textContent = "A toi de jouer !"
+    competitor2.textContent = ""
+  } else {
+    competitor2.textContent = "A toi de jouer !"
+    competitor1.textContent = ""
+  }
 
   for(let i = 1; i<= 9; i++){ // Création de 9 box
 
@@ -246,7 +318,7 @@ function reloadGame(){
 
   switchPlayer()
   
-  if (player == "X"){
+  if (player == "O"){
 
     competitor1.textContent = "A toi !"
     competitor2.textContent = ""
