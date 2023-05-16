@@ -113,85 +113,75 @@ board.appendChild(btnBegin) // Affichage dans le HTML du btn BEGIN
 
 
 
-btnName1.addEventListener("click", function(){
+btnName1.addEventListener("click", function(){ // Lorsque joueur 1 clique sur Ok
 
-player1.name = inputName1.value
+  player1.name = inputName1.value // Son nom est pris en compte 
 
+  if (player2Ready == true && (selectSymbol1.value == player2.symbol)){ // Si le joueur 2 est ready (qu'il a pressé OK) et que le symbole de P1 == P2, alors une erreur s'affiche
+    
+      jeu.textContent = player1.name + " veuillez choisir un autre symbole"
 
-if (player2Ready == true && (selectSymbol1.value == player2.symbol)){
-  
-    jeu.textContent = player1.name + " veuillez choisir un autre symbole"
-
-  } else {
-    name1.textContent = inputName1.value
-    player1Ready = true;
-    player1.symbol = selectSymbol1.value
-    // btnName1.remove() // Pas besoin car au clic le contenu de la balise est remplacé par le nom du joueur.
-    // inputName1.remove()
-    showSymbolP1.textContent = "Symbole : " + player1.symbol
+    } else { // Si tout est ok, son nom est affiché à la place du bouton et de la selectField des symboles. Son symbole est aussi affiché.
+      name1.textContent = inputName1.value
+      player1Ready = true;
+      player1.symbol = selectSymbol1.value
+      // btnName1.remove() // Pas besoin car au clic le contenu de la balise est remplacé par le nom du joueur.
+      // inputName1.remove()
+      showSymbolP1.textContent = "Symbole : " + player1.symbol
   }
 })
 
-btnName2.addEventListener("click", function(){
+btnName2.addEventListener("click", function(){ // Idem lorsque joueur 2 clique sur Ok
   
-player2.name = inputName2.value
+  player2.name = inputName2.value
 
-
-
-if (player1Ready == true && (player1.symbol == selectSymbol2.value) ){
-  
-    jeu.textContent = player2.name + " veuillez choisir un autre symbole"
-    console.log(player2Ready)
-
-  } else {
-    name2.textContent = inputName2.value
-    player2Ready = true;
-    player2.symbol = selectSymbol2.value
-    showSymbolP2.textContent = "Symbole : " + player2.symbol
-    // btnName2.remove() // Pas besoin car au clic le contenu de la balise est remplacé par le nom du joueur.
-    // inputName2.remove()
+  if (player1Ready == true && (player1.symbol == selectSymbol2.value) ){
+    
+      jeu.textContent = player2.name + " veuillez choisir un autre symbole"
+      
+    } else {
+      name2.textContent = inputName2.value
+      player2Ready = true;
+      player2.symbol = selectSymbol2.value
+      showSymbolP2.textContent = "Symbole : " + player2.symbol
+      // btnName2.remove() // Pas besoin car au clic le contenu de la balise est remplacé par le nom du joueur.
+      // inputName2.remove()
   }
 })
 
 // BOUTON PERMETTANT DE COMMENCER LA PARTIE
 btnBegin.addEventListener("click", function(){
 
-  if (player1Ready && player2Ready){
-
+  if (player1Ready && player2Ready){ // Si player 1 et 2 sont en True, c'est que tout est ok au niveau des profils
 
     showSymbolP1.textContent = "Symbole : " + player1.symbol 
     showSymbolP2.textContent = "Symbole : " + player2.symbol
-    addReloadBtn()
-    newGame()
-    btnBegin.remove()
+    addReloadBtn() // On affiche alors le btn qui permet de recommencer une game avec les joueurs actuels.
+    newGame() // On lance la game.
+    btnBegin.remove() // On retire le btn central qui était sur la grille de jeu.
 
   } else {
-
-    jeu.textContent = "La partie ne peut pas commencer !"
-
-    // Reafficher le choix des symboles.
-
-    
-}
+    jeu.textContent = "Joueurs, validez vos profils !"    // Sinon c'est que les profils sont pas ok.   
+  }
 
 })
 
 // BOUTON QUI APPARAIT POUR RELANCER UNE PARTIE
 function addReloadBtn(){
 
-const reloadBtn = document.createElement("button")
+const reloadBtn = document.createElement("button") // Creation d'un btn dans le DOM
 
-reloadBtn.textContent = " Relancer"
+reloadBtn.textContent = " Relancer" // Avec son texte par défaut.
 
-reloadBtn.classList.add("retry")
+reloadBtn.classList.add("retry") // Et le lien avec sa classe CSS
 
-const reloadArea = document.querySelector("#reload")
+const reloadArea = document.querySelector("#reload") // On récupère la balise parent qui contiendra le bouton enfant.
 
-reloadArea.appendChild(reloadBtn)
+reloadArea.appendChild(reloadBtn) // Affichage HTML du btn dans son parent ReloadArea.
 
 //Fonction associée pour relancer une game
 
-reloadBtn.addEventListener("click", function(){
+reloadBtn.addEventListener("click", function(){ // Au clic on relance une Game tout simplement.
 
   reloadGame()
 
@@ -255,6 +245,9 @@ function newGame(){ // Création d'une nouvelle partie.
             
             competitor2.textContent = ""
             competitor1.textContent = ""
+
+            document.getElementById("gamer1").style.backgroundColor = "#83c5be"; // foncé
+            document.getElementById("gamer2").style.backgroundColor = "#83c5be"; // foncé
         
             gameFinished = true;        
           }    
@@ -328,8 +321,10 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
  
   if (condition1 || condition2 || condition3 || condition4 || condition5 || condition6 || condition7 || condition8){ // Que des OU. Une doit être True pour être vainqueur.
 
-    if (player == "X"){
+    if (player == player1.symbol){ // player c'est le player actuel qui a rempli 1 condition. Si c'est player1 alors on affiche le score. Sinon c'est que c'est l'autre qui a gagné.
 
+      document.getElementById("gamer1").style.backgroundColor = "#bdfff8"; // clair
+      document.getElementById("gamer2").style.backgroundColor = "#83c5be"; // foncé
       competitor1.textContent = "Gagné !"
       competitor2.textContent = ""
       scorePlayer1++
@@ -337,6 +332,8 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
 
     } else {
       
+      document.getElementById("gamer1").style.backgroundColor = "#83c5be"; // foncé
+      document.getElementById("gamer2").style.backgroundColor = "#bdfff8"; // clair
       competitor2.textContent = "Gagné !"
       competitor1.textContent = ""
       scorePlayer2++
@@ -351,32 +348,20 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
   }
 }
 
-function reloadGame(){  
+function reloadGame(){  // Fonction qui delete les box Actuelles et qui en génère de nouvelles.
 
   jeu.textContent = "C'EST PARTI"
     
-  for(let i = 1; i<= 9; i++){
+  for(let i = 1; i<= 9; i++){ // Boucle qui delete les box
 
     boxToDelete = "box"+i
 
     document.getElementById(boxToDelete).remove()
-
   }
 
   newGame() // Recréation des box.
   gameFinished = false; // Réinitialisation de la game.
   count = 0; // Réinitialisation du compteur de coups
 
-  switchPlayer()
-  
-  // if (player == "O"){
-
-  //   competitor1.textContent = "A toi !"
-  //   competitor2.textContent = ""
-
-  // } else {
-    
-  //   competitor2.textContent = "A toi !"
-  //   competitor1.textContent = ""
-  // }
+  switchPlayer() // Sans oublier de switch pour que ce soit l'autre joueur qui commence le jeu. 
 }
