@@ -1,5 +1,5 @@
-let player1 = { symbol : "X", name : "Loic" } // le nom du joueur sera pour plus tard
-let player2 = { symbol : "O", name : "Marie"}
+let player1 = { symbol : "X", name : "George" } // le nom du joueur sera pour plus tard
+let player2 = { symbol : "O", name : "Georgette"}
 
 let name1 = document.getElementById("gamer1Name") // Permettra d'intéragir avec l'ID des noms.
 let name2 = document.getElementById("gamer2Name")
@@ -22,7 +22,7 @@ let competitor2 = document.getElementById("competitor2")
 
 let gameFinished = false
 
-competitor1.textContent = "A toi de jouer !"
+competitor1.textContent = ""
 
 // CREATION DE LA BOX DE BASE ----------------------------------------
 
@@ -30,9 +30,71 @@ const box = document.createElement("div") // créé une div
 box.classList.add("box") // ajoute la classe css à notre box
 const board = document.querySelector("#board")
 
+
+// Creation des Input pour les noms des joueurs et des symboles respectifs
+
+const gamer1Area = document.querySelector("#gamer1Name")
+const gamer2Area = document.querySelector("#gamer2Name")
+
+const inputName1 = document.createElement("input")
+const inputName2 = document.createElement("input")
+
+const btnName1 = document.createElement ("button")
+const btnName2 = document.createElement ("button")
+
+const btnBegin = document.createElement ("button")
+btnBegin.classList.add("btnBegin")
+
+gamer1Area.appendChild(inputName1)
+gamer2Area.appendChild(inputName2)
+
+gamer1Area.appendChild(btnName1)
+gamer2Area.appendChild(btnName2)
+
+board.appendChild(btnBegin)
+btnBegin.innerText = "Commencer !"
+
+inputName1.classList.add("gamerInput")
+inputName2.classList.add("gamerInput")
+
+inputName1.value = "Ajoute ton nom"
+inputName2.value = "Ajoute ton nom"
+
+btnName1.innerText = "OK"
+btnName2.innerText = "OK"
+
+
+
+inputName1.addEventListener("click", function(){
+inputName1.value = ""})
+
+inputName2.addEventListener("click", function(){
+inputName2.value = ""})
+
+
+
+btnName1.addEventListener("click", function(){
+player1.name = inputName1.value
+name1.textContent = inputName1.value
+btnName1.remove()
+inputName1.remove()
+})
+
+btnName2.addEventListener("click", function(){
+player2.name = inputName2.value
+name2.textContent = inputName2.value
+btnName2.remove()
+inputName2.remove()
+})
+
+btnBegin.addEventListener("click", function(){
+  newGame()
+  btnBegin.remove()
+})
+
 // ---------------------------------------------------------------
  
-newGame() // Appel automatique de la fct newGame pour afficher directement le morpion à l'ouverture de la page.
+ // Appel automatique de la fct newGame pour afficher directement le morpion à l'ouverture de la page.
 
 // FONCTIONS DE JEU
 
@@ -105,10 +167,8 @@ function switchPlayer(){ // Fonction permettant de switcher de joueur et donc de
 
     competitor1.textContent = "A toi de jouer !"
     competitor2.textContent = ""
-  }
-
-  }
-  
+    }
+  }  
 }
 
 function checkScore(player){  // Check toutes les conditions possibles de victoire à chaque coup joué. 

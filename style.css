@@ -23,7 +23,7 @@ body{
     font-size: 1.5em;
 }
 
-.gamer{
+#gamer1, #gamer2{
     background-color: #83c5be;
 }
 
@@ -101,4 +101,39 @@ p{
     margin-top : 150px;
     font-size: 1.5em;
     font-weight: bold;
+}
+
+.gamerInput{
+    outline : none;
+    display: block;
+    margin : auto auto;
+    border : none;
+    height : 40px;
+    text-align: center;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+button{
+    font-weight: bold;
+    border : none;
+    border-radius: 5px;
+    margin-top : 5px;
+    height : 40px;
+    width : 40px;
+}
+
+button:active{
+    background-color: #EAAC8B;
+    height : 39px;
+    width : 39px;
+}
+
+.btnBegin{
+    width : 150px;
+}
+
+.btnBegin:active{
+    background-color: #355070;
+    width : 145px;
 }
