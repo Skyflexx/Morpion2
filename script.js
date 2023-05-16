@@ -302,26 +302,38 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
   let b9 = document.getElementById("box9")
 
   // Conditions score en Ligne
- 
+
+  
 
   let condition1 = (b1.innerText == player && b2.innerText == player && b3.innerText == player) // ressort true ou false.
   let condition2 = (b4.innerText == player && b5.innerText == player && b6.innerText == player) // player c'est en fin de compte le joueur en cours avant le switch de symbole vu que la fct de switch est appelée après la fct checkscore dans le HTML
   let condition3 = (b7.innerText == player && b8.innerText == player && b9.innerText == player)
+
+  if (condition1){ b1.style.color = "#E56B6F", b2.style.color = "#E56B6F", b3.style.color = "#E56B6F";}
+  if (condition2){ b4.style.color = "#E56B6F", b5.style.color = "#E56B6F", b6.style.color = "#E56B6F";}
+  if (condition3){ b7.style.color = "#E56B6F", b8.style.color = "#E56B6F", b9.style.color = "#E56B6F";}
  
   // Condition score en colonne
  
   let condition4 = (b1.innerText == player && b4.innerText == player && b7.innerText == player)
   let condition5 = (b2.innerText == player && b5.innerText == player && b8.innerText == player)
   let condition6 = (b3.innerText == player && b6.innerText == player && b9.innerText == player)
+
+  if (condition4){ b1.style.color = "#E56B6F", b4.style.color = "#E56B6F", b7.style.color = "#E56B6F";}
+  if (condition5){ b2.style.color = "#E56B6F", b5.style.color = "#E56B6F", b8.style.color = "#E56B6F";}
+  if (condition6){ b3.style.color = "#E56B6F", b6.style.color = "#E56B6F", b9.style.color = "#E56B6F";}
  
   // Conditions pour les Diagonales
  
   let condition7 = (b1.innerText == player && b5.innerText == player && b9.innerText == player) 
   let condition8 = (b3.innerText == player && b5.innerText == player && b7.innerText == player)
+
+  if (condition7){ b1.style.color = "#E56B6F", b5.style.color = "#E56B6F", b9.style.color = "#E56B6F";}
+  if (condition8){ b3.style.color = "#E56B6F", b6.style.color = "#E56B6F", b7.style.color = "#E56B6F";}
  
   if (condition1 || condition2 || condition3 || condition4 || condition5 || condition6 || condition7 || condition8){ // Que des OU. Une doit être True pour être vainqueur.
 
-    if (player == player1.symbol){ // player c'est le player actuel qui a rempli 1 condition. Si c'est player1 alors on affiche le score. Sinon c'est que c'est l'autre qui a gagné.
+     if (player == player1.symbol){ // player c'est le player actuel qui a rempli 1 condition. Si c'est player1 alors on affiche le score. Sinon c'est que c'est l'autre qui a gagné.
 
       document.getElementById("gamer1").style.backgroundColor = "#bdfff8"; // clair
       document.getElementById("gamer2").style.backgroundColor = "#83c5be"; // foncé
