@@ -309,7 +309,7 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
   let condition2 = (b4.innerText == player && b5.innerText == player && b6.innerText == player) // player c'est en fin de compte le joueur en cours avant le switch de symbole vu que la fct de switch est appelée après la fct checkscore dans le HTML
   let condition3 = (b7.innerText == player && b8.innerText == player && b9.innerText == player)
 
-  if (condition1){ b1.style.color = "#a7344e", b2.style.color = "#a7344e", b3.style.color = "#a7344e";}
+  if (condition1){ b1.style.color = "#a7344e", b2.style.color = "#a7344e", b3.style.color = "#a7344e";} // Changement de couleur pour le symbole victorieux
   if (condition2){ b4.style.color = "#a7344e", b5.style.color = "#a7344e", b6.style.color = "#a7344e";}
   if (condition3){ b7.style.color = "#a7344e", b8.style.color = "#a7344e", b9.style.color = "#a7344e";}
  
