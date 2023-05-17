@@ -1,5 +1,5 @@
-let player1 = { symbol : "O", name : "George" } // Object joueur contenant symbole et nom par défaut.
-let player2 = { symbol : "X", name : "Georgette"}
+let player1 = { symbol : "O", name : "Joueur 1" } // Object joueur contenant symbole et nom par défaut.
+let player2 = { symbol : "X", name : "Joueur 2"}
 
 let player1Ready = false // Initialisation des joueurs à false. Il faudra cliquer sur OK pour que ça passe true indiquant que le joueur est prêt
 let player2Ready = false
@@ -115,7 +115,13 @@ board.appendChild(btnBegin) // Affichage dans le HTML du btn BEGIN
 
 btnName1.addEventListener("click", function(){ // Lorsque joueur 1 clique sur Ok
 
-  player1.name = inputName1.value // Son nom est pris en compte 
+  if (inputName1.value == ""){
+
+    player1.name = "Joueur 1"
+    inputName1.value = "Joueur 1"
+
+  } else player1.name = inputName1.value // Son nom est pris en compte 
+
 
   if (player2Ready == true && (selectSymbol1.value == player2.symbol)){ // Si le joueur 2 est ready (qu'il a pressé OK) et que le symbole de P1 == P2, alors une erreur s'affiche
     
@@ -134,7 +140,12 @@ btnName1.addEventListener("click", function(){ // Lorsque joueur 1 clique sur Ok
 
 btnName2.addEventListener("click", function(){ // Idem lorsque joueur 2 clique sur Ok
   
-  player2.name = inputName2.value
+ if (inputName2.value == ""){
+
+    player2.name = "Joueur 2"
+    inputName2.value = "Joueur 2"
+
+  } else player1.name = inputName1.value // Son nom est pris en compte 
 
   if (player1Ready == true && (player1.symbol == selectSymbol2.value) ){
     
