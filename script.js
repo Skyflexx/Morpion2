@@ -115,7 +115,7 @@ board.appendChild(btnBegin) // Affichage dans le HTML du btn BEGIN
 
 btnName1.addEventListener("click", function(){ // Lorsque joueur 1 clique sur Ok
 
-  if (inputName1.value == ""){
+  if (inputName1.value == ""){ // On vérifie si l'inputfield n'a pas été remplie par le joueur (si elle est cliquée elle est vidée automatiquement). On rajoute par défaut "Joueur 1" lors du clic sur Ok.
 
     player1.name = "Joueur 1"
     inputName1.value = "Joueur 1"
@@ -140,7 +140,7 @@ btnName1.addEventListener("click", function(){ // Lorsque joueur 1 clique sur Ok
 
 btnName2.addEventListener("click", function(){ // Idem lorsque joueur 2 clique sur Ok
   
- if (inputName2.value == ""){
+ if (inputName2.value == ""){ // Vérification si l'inputfield contient un nom. Sinon par défaut joueur 2
 
     player2.name = "Joueur 2"
     inputName2.value = "Joueur 2"
