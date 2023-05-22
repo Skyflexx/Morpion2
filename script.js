@@ -1,5 +1,28 @@
 let player1 = { symbol : "O", name : "Joueur 1" } // Object joueur contenant symbole et nom par défaut.
-let player2 = { symbol : "X", name : "Joueur 2"}
+let player2 = { symbol : "X", name : "Joueur 2" }
+
+/////////// EXEMPLE DE TECHNIQUE DE FACTORISATION POUR LA SUITE ////////////////////////////
+
+// let players = [
+//   // player1
+//   {
+//     symbol : "O",
+//     name : "Joueur 1",
+//     isReady: false,
+//     score: 0
+//   },
+//   // player2
+//   {
+//     symbol : "X",
+//     name : "Joueur 2",
+//     isReady: false,
+//     score: 0
+//   },
+// ];
+
+// players.forEach((playerCurr, playerIndex) => playerCurr.name = `Joueur ${playerIndex + 1}`);
+
+////////////////////////////////////
 
 let player1Ready = false // Initialisation des joueurs à false. Il faudra cliquer sur OK pour que ça passe true indiquant que le joueur est prêt
 let player2Ready = false
@@ -65,6 +88,12 @@ const symbol2 = document.createElement("option")
 
 const symbol3 = document.createElement("option") // Pour la selectfield du joueur 2
 const symbol4 = document.createElement("option")
+
+// EXEMPLE DE SYMBOLS QUI AURAIENT PU FAIRE L'OBJET D'UN TABLEAU POUR UTILISER AU MIEUX LE DOM 
+
+// const symbols = ["O", "X", "♥", "♫"];
+
+// Puis une boucle pour afficher la liste déroulante. Ce que j'ai fait c'est fonctionnel mais perfectible car bcp de lignes pour pas grand chose. (en html ç'aurait été plus court)
 
 symbol1.value = "O" // On ajoute les symboles en value et en textContent pour l'affichage. On inverse volontairement les deux pour un affichage + ergonomique.
 symbol2.value = "X"
@@ -314,8 +343,6 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
   let b9 = document.getElementById("box9")
 
   // Conditions score en Ligne
-
-  
 
   let condition1 = (b1.innerText == player && b2.innerText == player && b3.innerText == player) // ressort true ou false.
   let condition2 = (b4.innerText == player && b5.innerText == player && b6.innerText == player) // player c'est en fin de compte le joueur en cours avant le switch de symbole vu que la fct de switch est appelée après la fct checkscore dans le HTML
