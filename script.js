@@ -341,7 +341,7 @@ function checkScore(player){  // Check toutes les conditions possibles de victoi
   let condition8 = (b3.innerText == player && b5.innerText == player && b7.innerText == player)
 
   if (condition7){ b1.style.color = "#a7344e", b5.style.color = "#a7344e", b9.style.color = "#a7344e";}
-  if (condition8){ b3.style.color = "#a7344e", b6.style.color = "#a7344e", b7.style.color = "#a7344e";}
+  if (condition8){ b3.style.color = "#a7344e", b5.style.color = "#a7344e", b7.style.color = "#a7344e";}
  
   if (condition1 || condition2 || condition3 || condition4 || condition5 || condition6 || condition7 || condition8){ // Que des OU. Une doit être True pour être vainqueur.
 
